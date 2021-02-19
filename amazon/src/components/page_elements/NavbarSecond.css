@@ -1,0 +1,19 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #232f3f;
+  color: #fff;
+  height: 40px;
+  padding: 0 20px 0 10px;
+}
+
+.navbar__option {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.option__all {
+  font-weight: 700;
+}

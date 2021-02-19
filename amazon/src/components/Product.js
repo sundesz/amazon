@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Product.css'
 import { useStateValue } from '../StateProvider'
 
-const Product = ({id, title, image, price, rating}) => {
+const Product = ({id, title, image, price, rating, quantity}) => {
 
     const [{basket}, dispatch] = useStateValue()
 
@@ -17,6 +18,7 @@ const Product = ({id, title, image, price, rating}) => {
                 image: image,
                 price: price,
                 rating: rating,
+                quantity: quantity,
             }
         })
     }
@@ -46,6 +48,17 @@ const Product = ({id, title, image, price, rating}) => {
             <button type="button" onClick={addToBasket} style={{cursor: 'pointer'}} >Add to Baskets</button>
         </div>
     )
+}
+
+
+Product.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    quantity: PropTypes.number.isRequired,
+
 }
 
 export default Product

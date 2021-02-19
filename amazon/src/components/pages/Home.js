@@ -18,6 +18,7 @@ const Home = () => {
                         price={29.99}
                         image="https://images-na.ssl-images-amazon.com/images/I/51I3UjD-Q1L.jpg"
                         rating={5}
+                        quantity={1}
                     />
                     <Product
                         id="12346"
@@ -25,6 +26,7 @@ const Home = () => {
                         price={319.99}
                         image="https://m.media-amazon.com/images/I/61pYrTWbXsL._AC_UL320_.jpg"
                         rating={4}
+                        quantity={1}
                     />
                 </div>
 
@@ -35,6 +37,7 @@ const Home = () => {
                         price={300}
                         image="https://m.media-amazon.com/images/I/71Us3Pn3zuL._AC_UL320_.jpg"
                         rating={5}
+                        quantity={1}
                     />
                     <Product
                         id="12348"
@@ -42,6 +45,7 @@ const Home = () => {
                         price={300}
                         image="https://m.media-amazon.com/images/I/81Nte0VhSNL._AC_UL320_.jpg"
                         rating={4}
+                        quantity={1}
                     />
                     <Product
                         id="12349"
@@ -49,6 +53,7 @@ const Home = () => {
                         price={494}
                         image="https://m.media-amazon.com/images/I/41-8PfVvLxL._AC_SR400,600_.jpg"
                         rating={5}
+                        quantity={1}
                     />
                 </div>
 
@@ -59,6 +64,7 @@ const Home = () => {
                     price={899}
                     image="https://m.media-amazon.com/images/I/81VktBgbSML._AC_UY218_.jpg"
                     rating={4}
+                    quantity={1}
                 />
                 </div>
             </div>

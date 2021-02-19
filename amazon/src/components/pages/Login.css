@@ -5,7 +5,7 @@
   margin-top: 18px;
 }
 
-.amazon-logo {
+/* .amazon-logo {
   background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/gno/sprites/nav-sprite-global-1x-hm-dsk-reorg._CB405937547_.png);
   background-position: 0 1000px;
   background-repeat: repeat-x;
@@ -15,9 +15,9 @@
   float: left;
   text-indent: -500px;
   background-position: -10px -51px;
-  width: 97px;
-  height: 30px;
-}
+  width: 100px;
+  height: 35px;
+} */
 
 .login {
   background-color: #fff;

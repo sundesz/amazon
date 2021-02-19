@@ -2,7 +2,8 @@ import { useStateValue } from '../../StateProvider'
 import './Checkout.css'
 import CheckoutProduct from './components/CheckoutProduct'
 import Subtotal from './components/Subtotal'
-import FlipMove from 'react-flip-move'
+import { getBasekTotalItem, getBasketTotal } from '../../reducer'
+import CurrencyFormat from 'react-currency-format'
 
 
 const Checkout = () => {
@@ -13,22 +14,38 @@ const Checkout = () => {
     return (
         <div className="checkout">
             <div className="checkout__left">
-                <div className="checkout__products">
-                    <h2 className="checkout__title">
-                        <span style={{display: 'block'}}>{user ? `Hello ${user?.email},` : ''}</span>
-                        Shopping Basket
-                    </h2>
+                <h2 className="checkout__title">
+                    <span style={{display: 'block'}}>{user ? `Hello ${user?.email},` : ''}</span>
+                    Shopping Basket
+                </h2>
 
-                {basket.map((item, index) => (
-                    <CheckoutProduct
-                        key={index}
-                        id={item.id}
-                        title={item.title}
-                        image={item.image}
-                        price={item.price}
-                        rating={item.rating}
+                <div className="checkout__products">
+                    {basket.map((item, index) => (
+                        <CheckoutProduct
+                            key={index}
+                            id={item.id}
+                            title={item.title}
+                            image={item.image}
+                            price={item.price}
+                            quantity={item.quantity}
+                            rating={item.rating}
+                        />
+                    ))}
+                </div>
+
+                <div className="checkout__total">
+                    <CurrencyFormat
+                        renderText={(value) => (
+                            <p>
+                                Subtotal ({ getBasekTotalItem(basket) } items): <strong>{value}</strong>
+                            </p>
+                        )}
+                        decimalScale={2}
+                        value={ getBasketTotal(basket) }
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"€"}
                     />
-                ))}
 
                 </div>
             </div>

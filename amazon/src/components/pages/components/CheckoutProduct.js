@@ -2,7 +2,7 @@ import React from 'react'
 import { useStateValue } from '../../../StateProvider'
 import './CheckoutProduct.css'
 
-const CheckoutProduct = ({ id, title, image, price, rating }) => {
+const CheckoutProduct = ({ id, title, image, price, rating, quantity, hideButton }) => {
 
     const [{basket}, dispatch] = useStateValue()
 
@@ -13,21 +13,46 @@ const CheckoutProduct = ({ id, title, image, price, rating }) => {
         })
     }
 
+    const addToBasket = (qty) => {
+        qty = parseInt(qty)
+        dispatch({
+            type: (qty === 0) ? 'REMOVE_FROM_BASKET' : 'ADD_TO_BASKET_FROM_CART',
+            id: id,
+            quantity: qty,
+        })
+    }
+
     return (
         <div className='checkoutProduct'>
             <img className="checkoutProduct__image" src={image} alt="" />
 
-            <div className="checkoutProduct__info">
-                <p className="checkoutProduct__title">{title}</p>
-                <p className="checkoutProduct__price">
-                    <small>€</small>
-                    <strong>{price}</strong>
-                </p>
-                <div className="checkoutProduct__rating">
-                    { Array(rating).fill().map((_, i) => <p key={i}>*</p>)}
+            <div className="checkoutProduct__detail">
+
+                <div className="checkoutProduct__info">
+                    <p className="checkoutProduct__title">{title}</p>
+                    <div className="checkoutProduct__rating">
+                        { Array(rating).fill().map((_, i) => <p key={i}>*</p>)}
+                    </div>
+
+                    <div className="checkoutProduct__operations">
+                        {hideButton ? {quantity} : (
+                            <>
+                            <select name="" id="" onChange={(e) => addToBasket(e.target.value)} value={quantity}>
+                                {Array.from({length: 10},(_,x) => (<option key={x} value={x}>{x === 0 ? `${x} (Delete)` : x}</option>))}
+                            </select> &nbsp;| &nbsp;
+                            <span className="remove" type="button" onClick={removeFromBasket} style={{cursor: 'pointer'}}>Remove from Basket</span>
+                            </>
+                        )}
+
+                    </div>
+
                 </div>
 
-                <button type="button" onClick={removeFromBasket} style={{cursor: 'pointer'}}>Remove from Basket</button>
+                <div className="checkoutProduct__price">
+                    <small>€</small>
+                    <strong>{price}</strong>
+                </div>
+
             </div>
         </div>
     )
