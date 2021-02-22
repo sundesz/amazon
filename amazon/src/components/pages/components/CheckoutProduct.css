@@ -56,3 +56,7 @@
   font-size: 14px;
   color: #ff0000;
 }
+
+.checkoutProduct__price > small {
+  padding-right: 4px;
+}

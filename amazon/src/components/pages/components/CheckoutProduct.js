@@ -35,7 +35,7 @@ const CheckoutProduct = ({ id, title, image, price, rating, quantity, hideButton
                     </div>
 
                     <div className="checkoutProduct__operations">
-                        {hideButton ? {quantity} : (
+                        {hideButton ? (<span>Qty: {quantity}</span>) : (
                             <>
                             <select name="" id="" onChange={(e) => addToBasket(e.target.value)} value={quantity}>
                                 {Array.from({length: 10},(_,x) => (<option key={x} value={x}>{x === 0 ? `${x} (Delete)` : x}</option>))}

@@ -1,6 +1,7 @@
 export const initialState = {
     basket: [],
     user: null,
+    country: null,
     menu: [
         'Prime Video',
         'AmazonBasics',
@@ -45,7 +46,7 @@ export const initialState = {
 }
 
 export const getBasketTotal = (basket) => (
-    basket.reduce((total, basketItem) => basketItem.price + total, 0)
+    basket.reduce((total, basketItem) => (basketItem.price * basketItem.quantity) + total, 0)
 )
 
 export const getBasekTotalItem = (basket) => (
@@ -105,6 +106,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.user
+            }
+
+        case 'SET_COUNTRY':
+            return {
+                ...state,
+                country: action.country
             }
 
         case 'EMPTY_BASKET':

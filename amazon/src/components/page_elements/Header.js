@@ -10,7 +10,7 @@ import { getUserName, getBasekTotalItem } from '../../reducer';
 
 const Header = () => {
 
-    const [{ basket, user }, dispatch] = useStateValue()
+    const [{ basket, user, country }, dispatch] = useStateValue()
 
     const handleAuthentication = () => {
         auth.signOut()
@@ -34,7 +34,7 @@ const Header = () => {
                             Deliver to {user ? getUserName(user.email) : ''}
                         </div>
                         <div className="nav__optionLineTwo">
-                            Location
+                            {country}
                         </div>
                     </div>
                 </div>

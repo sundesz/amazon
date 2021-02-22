@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/page_elements/Header'
@@ -10,14 +9,13 @@ import { auth } from './firebase'
 import { useStateValue } from './StateProvider';
 import NavbarSecond from './components/page_elements/NavbarSecond';
 
-import Drawer from '@material-ui/core/Drawer'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Grid from '@material-ui/core/Grid'
+
 import Payment from './components/pages/Payment';
 
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import Orders from './components/pages/Orders';
+import axios from 'axios'
 
 
 const promise = loadStripe('pk_test_51IMA7hF5c4R7e5PYlI3QqvAsai8z3VmG8VbX5bMqFQcKsPwX7VhIg6aRWOYqr4bKnRIwnKQv2JlI2DZOLd4VVp3t00Vbh2aAHx')
@@ -34,6 +32,15 @@ function App() {
         type: 'SET_USER',
         user: authUser ? authUser : null
       })
+    })
+
+    axios.get('https://ipapi.co/json/').then(response => {
+      dispatch({
+        type: 'SET_COUNTRY',
+        country: response.data.country_name,
+      })
+    }).catch(error => {
+      console.log(error)
     })
   }, [])
 
@@ -64,7 +71,7 @@ function App() {
             </Elements>
           </Router>
 
-          <Route path="/">
+          <Route path="/" exact>
             <Header />
             <NavbarSecond />
             <Home />

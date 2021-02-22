@@ -1,5 +1,4 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import CurrencyFormat from 'react-currency-format'
 import { Link, useHistory } from 'react-router-dom'
@@ -9,6 +8,7 @@ import CheckoutProduct from './components/CheckoutProduct'
 
 import { db } from '../../firebase'
 import './Payment.css'
+import axios from '../../axios'
 
 
 const Payment = () => {
@@ -44,9 +44,8 @@ const Payment = () => {
     }, [basket])
 
 
-    clientSecret === true && console.warn('Client secret is true')
+    // clientSecret === true && console.warn('Client secret is true')
     // console.log("Stripe ClientSecret >>>", clientSecret)
-    // console.log("user >>>", user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()

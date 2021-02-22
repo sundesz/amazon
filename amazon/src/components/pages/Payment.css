@@ -46,7 +46,15 @@
   height: 30px;
   border: 1px solid;
   font-weight: bolder;
-  margin-top: 10px;
+  margin-top: 20px;
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
+  cursor: pointer;
+}
+
+.payment__details > form > div > button:disabled {
+  cursor: not-allowed;
+}
+.payment__priceContainer {
+  margin-top: 20px;
 }

@@ -31,16 +31,16 @@ app.use(express.json());
 // - API routes
 app.get("/", (request, response) => response.status(200).send("Hello World"));
 
-// app.post("/payments/create", async (request, response) => {
-app.post("/payments/create", (request, response) => {
+app.post("/payments/create", async (request, response) => {
+// app.post("/payments/create", (request, response) => {
   const total = request.query.total;
 
   console.log("Payment Request received", total);
 
-  // const paymentIntent = await stripe.paymentIntents.create({
-  const paymentIntent = stripe.paymentIntents.create({
+  const paymentIntent = await stripe.paymentIntents.create({
+  // const paymentIntent = stripe.paymentIntents.create({
     amount: total, // subunits of the currency
-    currency: "euro",
+    currency: "eur",
   });
 
   // Ok - Created
