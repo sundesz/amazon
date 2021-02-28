@@ -13,11 +13,16 @@
   z-index: 1;
 }
 
-.product > img {
+.product img {
   max-height: 200px;
   width: 100%;
   object-fit: contain;
   margin-bottom: 15px;
+}
+
+.product a {
+  text-decoration: none;
+  color: #111;
 }
 
 .product > button {

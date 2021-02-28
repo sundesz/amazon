@@ -5,12 +5,22 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../../StateProvider';
 import { auth } from '../../firebase'
-import { getUserName, getBasekTotalItem } from '../../reducer';
+import { getUserName, getBasekTotalItem, getBasketTotal } from '../../reducer';
+import { Badge, Drawer, Tooltip } from '@material-ui/core';
+import CurrencyFormat from 'react-currency-format';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  paper: {
+    padding: '5px 20px'
+  }
+});
 
 const Header = () => {
 
-    const [{ basket, user, country }, dispatch] = useStateValue()
+    const styles = useStyles();
+    const [{ basket, user, country, openCart }, dispatch] = useStateValue()
 
     const handleAuthentication = () => {
         auth.signOut()
@@ -92,6 +102,35 @@ const Header = () => {
                     </div>
                 </Link>
             </div>
+
+            <Drawer classes={{ paper: styles.paper }} anchor="right" open={openCart} onClose={() => dispatch({type: 'CLOSE_CART'})}>
+                <CurrencyFormat
+                    renderText={(value) => (
+                        <small style={{margin: '10px 0 30px 0', textAlign: 'center'}}>
+                            <p>
+                                Subtotal
+                            </p>
+                            <strong style={{color:"#b1270b"}}>{value}</strong>
+                        </small>
+                    )}
+                    decimalScale={2}
+                    value={ getBasketTotal(basket) }
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"€"}
+                />
+
+                {basket.map(basketItem => (
+                    <div key={basketItem.id} style={{display: 'flex', marginBottom: '20px'}}>
+                        <Badge color="secondary" badgeContent={basketItem.quantity}></Badge>
+                        <Link to={`/product/${basketItem.id}`}>
+                            <Tooltip title="View Related item" placement="left" arrow>
+                                <img key={basketItem.id} src={basketItem.image} className="cart__image" alt="" />
+                            </Tooltip>
+                        </Link>
+                    </div>
+                ))}
+            </Drawer>
         </div>
     )
 }

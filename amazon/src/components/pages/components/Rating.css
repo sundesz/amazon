@@ -1,0 +1,9 @@
+.rating {
+  display: flex;
+  color: #ffa41d;
+}
+
+.rating p {
+  padding: 5px 2px;
+  font-size: 30px;
+}

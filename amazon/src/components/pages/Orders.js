@@ -35,10 +35,12 @@ const Orders = () => {
             <h1>Your Orders</h1>
 
             <div className="orders__order">
-
-                {orders?.map((order, i) => (
+                {user ?
+                orders?.map((order, i) => (
                     <Order key={i} order={order} />
-                ))}
+                )):
+                <h5>Please sign in to see your orders</h5>
+                }
             </div>
         </div>
     )

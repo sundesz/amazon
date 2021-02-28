@@ -16,6 +16,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import Orders from './components/pages/Orders';
 import axios from 'axios'
+import ProductDetail from './components/pages/ProductDetail';
 
 
 const promise = loadStripe('pk_test_51IMA7hF5c4R7e5PYlI3QqvAsai8z3VmG8VbX5bMqFQcKsPwX7VhIg6aRWOYqr4bKnRIwnKQv2JlI2DZOLd4VVp3t00Vbh2aAHx')
@@ -23,7 +24,6 @@ const promise = loadStripe('pk_test_51IMA7hF5c4R7e5PYlI3QqvAsai8z3VmG8VbX5bMqFQc
 function App() {
 
   const [{user}, dispatch] = useStateValue()
-
 
   useEffect(() => {
 
@@ -42,7 +42,20 @@ function App() {
     }).catch(error => {
       console.log(error)
     })
+
+
+    axios.get('https://fakestoreapi.com/products?limit=6').then(response => {
+      dispatch({
+        type: 'LOAD_PRODUCTS',
+        products: response.data
+      })
+    }).catch(error => {
+      console.log(error)
+    })
+
   }, [])
+
+
 
   return (
     <Router>
@@ -53,6 +66,7 @@ function App() {
           <Route path="/orders">
             <Header />
             <Orders />
+            <Footer />
           </Route>
 
           <Route path="/login">
@@ -62,6 +76,7 @@ function App() {
           <Route path="/checkout">
             <Header />
             <Checkout />
+            <Footer />
           </Route>
 
           <Router path ="/payment">
@@ -69,7 +84,14 @@ function App() {
             <Elements stripe={promise}>
               <Payment />
             </Elements>
+            <Footer />
           </Router>
+
+          <Route path="/product/:productId">
+            <Header />
+            <ProductDetail />
+            <Footer />
+          </Route>
 
           <Route path="/" exact>
             <Header />

@@ -9,6 +9,7 @@ import CheckoutProduct from './components/CheckoutProduct'
 import { db } from '../../firebase'
 import './Payment.css'
 import axios from '../../axios'
+import { CircularProgress } from '@material-ui/core'
 
 
 const Payment = () => {
@@ -106,11 +107,13 @@ const Payment = () => {
                     <div className="payment__title">
                         <h3>Delivery Address</h3>
                     </div>
+                    { basket.length &&
                     <div className="payment__address">
                         <p>{user?.email}</p>
                         <p>Kivisto</p>
                         <p>01700, Vantaa</p>
                     </div>
+                    }
                 </div>
 
               {/* Payment section - Review Items */}
@@ -119,7 +122,7 @@ const Payment = () => {
                         <h3>Review items and delivery</h3>
                     </div>
                     <div className="payment__items">
-                        { basket.map(basketItem => (
+                        { basket.length ? basket.map(basketItem => (
                             <CheckoutProduct
                                 key={basketItem.id}
                                 id={basketItem.id}
@@ -129,16 +132,21 @@ const Payment = () => {
                                 rating={basketItem.rating}
                                 quantity={basketItem.quantity}
                             />
-                        ))}
+                        ))
+                        :
+                        <h3>Please add items</h3>
+                    }
                     </div>
                 </div>
 
               {/* Payment section - Payment method */}
+
                 <div className="payment__section">
                     <div className="payment__title">
                         <h3>Payment Method</h3>
                     </div>
                     <div className="payment__details">
+                        { basket.length && (user ?
                         <form action="" onSubmit={handleSubmit}>
                             <CardElement onChange={handleChange} />
 
@@ -155,15 +163,19 @@ const Payment = () => {
                                 />
 
                                 <button disabled={processing || disabled || succeeded}>
-                                    <span>{processing ? <p>Processing</p> : 'Buy Now' }</span>
+                                    <span>{processing ? <CircularProgress size="1rem" /> : 'Buy Now' }</span>
                                 </button>
                             </div>
 
                             {/* Errors */}
                             { error && <div>{error}</div>}
                         </form>
+                        :
+                        <h2><Link to="/login">Please Sign In</Link></h2>
+                        )}
                     </div>
                 </div>
+
           </div>
       </div>
     )

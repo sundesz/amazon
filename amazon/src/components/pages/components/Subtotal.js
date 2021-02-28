@@ -32,7 +32,7 @@ const Subtotal = () => {
                 prefix={"€"}
             />
 
-            <button type="button" style={{cursor: 'pointer'}} onClick={e => history.push("/payment")}>Procced to Checkout</button>
+            <button type="button" style={{cursor: 'pointer'}} onClick={e => history.push('/payment')}>Procced to Checkout</button>
         </div>
     )
 }

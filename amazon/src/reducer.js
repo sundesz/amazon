@@ -1,7 +1,10 @@
 export const initialState = {
+    products: [],
+    product: {},
     basket: [],
     user: null,
     country: null,
+    openCart: false,
     menu: [
         'Prime Video',
         'AmazonBasics',
@@ -67,15 +70,49 @@ const findBasketIndex = (basket, id) => (
 const reducer = (state, action) => {
 
     switch(action.type) {
+
+        case 'PRODUCT_DETAIL':
+            return {
+                ...state,
+                product: action.product
+            }
+
+        case 'CLOSE_CART':
+            return {
+                ...state,
+                openCart: false
+            }
+
+        case 'LOAD_PRODUCT':
+            return {
+                ...state,
+                product: action.product
+            }
+
+        case 'LOAD_PRODUCTS':
+
+            const products = action.products.map(p => ({...p, rating: 5, quantity: 10}))
+
+            return {
+                ...state,
+                products: products
+            }
+
         case 'ADD_TO_BASKET':
+
             let addBasket = (findBasketIndex(state.basket, action.item.id) >= 0)
                 ?
-                state.basket.map(basketItem => (basketItem.id === action.item.id ? {...basketItem, quantity: basketItem.quantity++} : basketItem))
+                state.basket.map(basketItem => (basketItem.id === action.item.id
+                    ?
+                    {...basketItem, quantity: basketItem.quantity + action.item.quantity}
+                    : basketItem
+                ))
                 :
                 [...state.basket, action.item]
 
             return {
                 ...state,
+                openCart: true,
                 basket: addBasket,
             }
 

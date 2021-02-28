@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { auth } from '../../firebase'
+import { useStateValue } from '../../StateProvider'
 
 // sudo npm install -g firebase-tools
 // npm i firebase
@@ -8,6 +9,7 @@ import './Login.css'
 
 const Login = () => {
 
+    const [{user}, dispatch] = useStateValue()
     const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -38,6 +40,7 @@ const Login = () => {
 
     return (
         <div className="login">
+            {user && history.push('/')}
             <Link to="/">
                 <img className="login__logo amazon-logo amazon-logo-base" alt=""/>
             </Link>
@@ -55,7 +58,7 @@ const Login = () => {
                 </form>
 
                 <p>
-                    By signing-in you agree to AMAZON FAKE CLONE Conditions of Use & Sale. Please see our Privacy Nocice, our Cookies Notice and our Interest-Based Ads Notice.
+                    By signing-in you agree to <strong>AMAZON FAKE CLONE</strong> Conditions of Use & Sale. Please see our Privacy Nocice, our Cookies Notice and our Interest-Based Ads Notice.
                 </p>
 
                 <button className="login__registerButton" onClick={registerUser} >Create your Amazon Account</button>

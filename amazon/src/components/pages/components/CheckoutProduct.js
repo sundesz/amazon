@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStateValue } from '../../../StateProvider'
 import './CheckoutProduct.css'
+import Rating from './Rating'
 
 const CheckoutProduct = ({ id, title, image, price, rating, quantity, hideButton }) => {
 
@@ -31,7 +32,7 @@ const CheckoutProduct = ({ id, title, image, price, rating, quantity, hideButton
                 <div className="checkoutProduct__info">
                     <p className="checkoutProduct__title">{title}</p>
                     <div className="checkoutProduct__rating">
-                        { Array(rating).fill().map((_, i) => <p key={i}>*</p>)}
+                        <Rating rating={rating} />
                     </div>
 
                     <div className="checkoutProduct__operations">

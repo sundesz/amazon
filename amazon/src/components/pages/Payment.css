@@ -58,3 +58,7 @@
 .payment__priceContainer {
   margin-top: 20px;
 }
+
+.payment__details h2 a {
+  text-decoration: none;
+}

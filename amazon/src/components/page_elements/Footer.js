@@ -5,10 +5,17 @@ const Footer = () => {
 
     const [{footer}, dispatch] = useStateValue()
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+    }
+
     return (
         <div className="footer">
             <div className="footer__top">
-                Back to top
+                <div style={{cursor: 'pointer'}} onClick={() => scrollToTop()}>Back to top</div>
             </div>
             <div className="footer__middle">
                 <div className="footer__middle__contain">

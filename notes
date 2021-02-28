@@ -1,0 +1,16 @@
+6:18:00  axios.js
+
+
+6:52:49
+Inside function
+firebase emulators:start
+
+6:34:03 For function
+firebase:init
+
+
+8:14:20
+firebase deploy --only functions
+
+8:22:21
+firebase deploy --only hosting

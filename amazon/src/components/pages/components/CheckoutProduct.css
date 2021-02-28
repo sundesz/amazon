@@ -32,14 +32,14 @@
   color: #111;
 }
 
-.checkoutProduct__rating {
+/* .checkoutProduct__rating {
   display: flex;
 }
 .checkoutProduct__rating > p {
   padding: 5px 5px 0 0;
   font-size: 30px;
   color: yellowgreen;
-}
+} */
 
 .checkoutProduct__title {
   font-size: 17px;

@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Product.css'
 import { useStateValue } from '../StateProvider'
+import CurrencyFormat from 'react-currency-format'
+import {Link} from 'react-router-dom'
+import Rating from './pages/components/Rating'
 
 const Product = ({id, title, image, price, rating, quantity}) => {
 
@@ -26,33 +29,42 @@ const Product = ({id, title, image, price, rating, quantity}) => {
 
     return (
         <div className="product">
-            <div className="product__info">
-                <p>{title}</p>
-                <p className="product__price">
-                    <small>€ </small>
-                    <strong>{price}</strong>
-                </p>
+            <Link to={`/product/${id}`}>
+                <div className="product__info">
+                    <p>{title}</p>
+                    <p className="product__price">
 
-                <div className="product__rating">
-                  {Array(rating).fill().map((_,i) => (
-                      <p key={i}>*</p>
-                  ))}
+                    <CurrencyFormat
+                        renderText={(value) => (
+                            <strong>{value}</strong>
+                        )}
+                        decimalScale={2}
+                        value={ price }
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"€"}
+                    />
+
+                    </p>
+
+                    <div className="product__rating">
+                        <Rating rating={rating} />
+                    </div>
                 </div>
-            </div>
 
-            <img
-                src={image}
-                alt=""
-            />
-
-            <button type="button" onClick={addToBasket} style={{cursor: 'pointer'}} >Add to Baskets</button>
+                <img
+                    src={image}
+                    alt=""
+                />
+            </Link>
+            <button type="button" onClick={addToBasket} style={{cursor: 'pointer'}} >Add to Basket</button>
         </div>
     )
 }
 
 
 Product.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
