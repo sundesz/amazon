@@ -15,6 +15,12 @@ https://www.youtube.com/watch?v=RDV3Z1KCBvo&t=30136s
 4. Payment feature
 5. Order History
 
+# Technology used
+
+1. React
+2. Firebase
+3. Stripe
+
 # Online address
 
 https://challenge-edb99.web.app/
